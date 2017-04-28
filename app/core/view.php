@@ -15,7 +15,7 @@ namespace App\Core;
  */
 class View {
     private $root = 'public/templates/';
-    private $extension = '.php';
+    private $extension = '.phtml';
     private $template;
 
     function __construct($file) {

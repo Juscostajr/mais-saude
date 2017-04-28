@@ -23,16 +23,28 @@ class DataBase {
     private $entidades = array(__DIR__ . "/model");
     private $namespace = 'App\\Model\\';
     private $isDevMode = true;
+    /**
+     *
+     * @var type EntityManager
+     */
     private $entityManager;
 
     function __construct() {
 // configurações de conexão. Coloque aqui os seus dados
+//            'host' => 'localhost',
+//            'driver' => 'pdo_mysql',
+//            'user' => 'root',
+//            'password' => '',
+//            'dbname' => 'saude',
         $dbParams = array(
             'host' => '179.188.16.9',
             'driver' => 'pdo_mysql',
             'user' => 'acicamaisaude',
             'password' => 'g321ggsaude',
             'dbname' => 'acicamaisaude',
+            'charset'  => 'utf8',
+            'driverOptions' => array(1002 => 'SET NAMES utf8')
+            
         );
 
 //setando as configurações definidas anteriormente
@@ -42,7 +54,12 @@ class DataBase {
 //criando o Entity Manager com base nas configurações de dev e banco de dados
         $this->entityManager = EntityManager::create($dbParams, $config);
     }
+    
+    public function getEntityManager() : EntityManager {
+        return $this->entityManager;
+    }
 
+    
     public function find(string $entityName, int $id) {
         return $this->entityManager->find($this->namespace . $entityName, $id);
     }

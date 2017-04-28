@@ -29,6 +29,10 @@ class Tipo {
      * @Column(name="NM_CLASSE",type="string", length=40, unique=true, nullable=false)
      */
     private $name;
+     /**
+     * @OneToMany(targetEntity="CLINICA", mappedBy="type", indexBy="symbol", cascade={"persist", "remove"})
+     */
+    private $clinic;
     
     public function getId() {
         return $this->id;

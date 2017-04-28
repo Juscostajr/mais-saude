@@ -25,7 +25,7 @@ class Endereco {
      */
     private $id;
     /**
-     * @Column(name="DS_CEP",type="string", length=9, unique=true, nullable=false)
+     * @Column(name="DS_CEP",type="string", length=9, unique=true, nullable=true)
      */
     private $zip;
     /**
@@ -36,6 +36,10 @@ class Endereco {
      * @Column(name="DS_LOGRADOURO",type="string", length=80, nullable=false)
      */
     private $place;
+    /**
+     * @Column(name="DS_COMPLEMENTO",type="string", length=50, nullable=true)
+     */
+    private $complement;
     /**
      * @Column(name="DS_CIDADE",type="string", length=40, nullable=false)
      */
@@ -48,10 +52,17 @@ class Endereco {
      * @Column(name="DS_LONGITUDE",type="string", length=10)
      */
     private $long;
+
     
-    
-    
-    public function getId() {
+    public function getComplement() {
+        return $this->complement;
+    }
+
+    public function setComplement($complement) {
+        $this->complement = $complement;
+    }
+
+        public function getId() {
         return $this->id;
     }
 

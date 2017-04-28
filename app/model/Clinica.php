@@ -23,6 +23,7 @@ class Clinica implements \JsonSerializable {
 
     public function __construct() {
         $this->phones = new ArrayCollection();
+        $this->profesionals = new ArrayCollection();
         $this->anotations = new ArrayCollection();
     }
 
@@ -39,12 +40,11 @@ class Clinica implements \JsonSerializable {
     private $name;
 
     /**
-     * @OneToMany(targetEntity="Telefone", mappedBy="clinic", indexBy="symbol", cascade={"persist", "remove"})
+     * @OneToMany(targetEntity="TELEFONE", mappedBy="clinic", indexBy="symbol", cascade={"persist", "remove"})
      */
     private $phones;
 
-    /**
-     * @OneToOne(targetEntity="Endereco", cascade={"persist", "remove"})
+    /** @OneToOne(targetEntity="Endereco")
      * @JoinColumn(name="FK_ENDERECO", referencedColumnName="CD_ENDERECO")
      */
     private $address;
@@ -54,18 +54,51 @@ class Clinica implements \JsonSerializable {
      * @JoinColumn(name="FK_CLASSE", referencedColumnName="CD_CLASSE")
      */
     private $type;
-
     /**
-     * @Column(type="string", name="DS_ESPECIALIDADE") 
+     * @OneToMany(targetEntity="PROFISSIONAL", mappedBy="clinic", indexBy="symbol", cascade={"persist", "remove"})
      */
-    private $specialty;
+    private $profesionals;
     /**
      * @OneToMany(targetEntity="Anotacao", mappedBy="clinic", cascade={"persist", "remove"})
      */
     private $anotations;
+    /**
+     * @Column(type="integer", name="VL_DESCONTO") 
+     */
+    private $discount;
 
 
-        public function getAddress() {
+      public function getProfesionals() {
+        return $this->profesionals->toArray();
+    }
+
+    public function addProfesional(Profissional $profesional) {
+        if (!$this->profesionals->contains($profesional)) {
+            $this->profesionals->add($profesional);
+        }
+        return $this;
+    }
+
+    public function removeProfesional(Profissional $profesional) {
+        if ($this->profesionals->contains($profesional)) {
+            $this->profesionals->removeElement($profesional);
+        }
+        return $this;
+    }
+
+    public function getDiscount() {
+        return $this->discount;
+    }
+
+    public function setProfesional($profesional) {
+        $this->profesional = $profesional;
+    }
+
+    public function setDiscount($discount) {
+        $this->discount = $discount;
+    }
+
+            public function getAddress() {
         return $this->address;
     }
 

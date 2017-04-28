@@ -25,7 +25,7 @@ class Telefone {
      */
     private $number;
     /**
-     * @ManyToOne(targetEntity="Clinica", inversedBy="phones")
+     * @ManyToOne(targetEntity="CLINICA", inversedBy="phones")
      * @JoinColumn(name="FK_CLINICA", referencedColumnName="CD_CLINICA")
      */
     private $clinic;
